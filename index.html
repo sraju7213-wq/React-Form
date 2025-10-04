@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valley Wedding Cars - Luxury Fleet Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="brand-title">Valley Wedding Cars</h1>
+                <h2 class="subtitle">Luxury Fleet Booking</h2>
+                <p class="tagline-urdu">Shaadi ka din khaas hota hai... aapki entry bhi waise hi honi chahiye.</p>
+                <p class="tagline-english">(Your wedding day is special—your entry should be unforgettable too.)</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="booking-layout">
+                <!-- Main Form -->
+                <div class="booking-form">
+                    <form id="bookingForm">
+                        <!-- Enquiry Type -->
+                        <div class="form-section">
+                            <h3>Enquiry Type</h3>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="enquiryType" value="Just Checking" required>
+                                    <span class="radio-text">Just Checking</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="enquiryType" value="Know the Price" required>
+                                    <span class="radio-text">Know the Price</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="enquiryType" value="Booking Now" required>
+                                    <span class="radio-text">Booking Now</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Service Type -->
+                        <div class="form-section">
+                            <h3>Service Type</h3>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Wedding" required>
+                                    <span class="radio-text">Wedding</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Engagement" required>
+                                    <span class="radio-text">Engagement</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Proposal" required>
+                                    <span class="radio-text">Proposal</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Photoshoot/Video Shoot" required>
+                                    <span class="radio-text">Photoshoot/Video Shoot</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Airport Pickup/Drop" required>
+                                    <span class="radio-text">Airport Pickup/Drop</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="serviceType" value="Sightseeing/Luxury Tour" required>
+                                    <span class="radio-text">Sightseeing/Luxury Tour</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Additional Details -->
+                        <div class="form-section">
+                            <h3>Additional Details</h3>
+                            
+                            <!-- Want Decoration -->
+                            <div class="form-group">
+                                <label class="form-label">Want Decoration:</label>
+                                <div class="radio-group inline">
+                                    <label class="radio-label">
+                                        <input type="radio" name="wantDecoration" value="No" required>
+                                        <span class="radio-text">No</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="wantDecoration" value="Yes" required>
+                                        <span class="radio-text">Yes</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Decoration Type (hidden by default) -->
+                            <div id="decorationTypeGroup" class="form-group hidden">
+                                <label class="form-label">Decoration Type:</label>
+                                <div class="radio-group inline">
+                                    <label class="radio-label">
+                                        <input type="radio" name="decorationType" value="Artificial">
+                                        <span class="radio-text">Artificial</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="decorationType" value="Fresh">
+                                        <span class="radio-text">Fresh</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Want Customized Name Plate -->
+                            <div class="form-group">
+                                <label class="form-label">Want Customized Name Plate:</label>
+                                <div class="radio-group inline">
+                                    <label class="radio-label">
+                                        <input type="radio" name="wantNamePlate" value="No" required>
+                                        <span class="radio-text">No</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="wantNamePlate" value="Yes" required>
+                                        <span class="radio-text">Yes</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Name Plate Details (hidden by default) -->
+                            <div id="namePlateGroup" class="form-group hidden">
+                                <label class="form-label">Name Plate Details:</label>
+                                <input type="text" name="namePlateDetails" class="form-control" placeholder="Enter name plate text">
+                            </div>
+                        </div>
+
+                        <!-- Location Details -->
+                        <div class="form-section">
+                            <h3>Location Details</h3>
+                            <div class="form-group">
+                                <label class="form-label">Event Start Location:</label>
+                                <input type="text" name="startLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Event End Location:</label>
+                                <input type="text" name="endLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
+                            </div>
+                        </div>
+
+                        <!-- Vehicle Selection -->
+                        <div class="form-section">
+                            <h3>Vehicle Selection</h3>
+                            <div class="form-group">
+                                <select id="vehicleSelect" name="vehicle" class="form-control" required>
+                                    <option value="">Choose a vehicle...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Date & Time -->
+                        <div class="form-section">
+                            <h3>Date & Time</h3>
+                            <div class="form-group">
+                                <label class="form-label">Event Date:</label>
+                                <input type="date" id="eventDate" name="eventDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Event Time:</label>
+                                <input type="time" name="eventTime" class="form-control" required placeholder="When do you want the car at the mentioned location?">
+                            </div>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-group">
+                                <label class="form-label">Full Name:</label>
+                                <input type="text" name="fullName" class="form-control" required placeholder="Enter your full name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address:</label>
+                                <input type="email" name="email" class="form-control" required placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone Number:</label>
+                                <input type="tel" name="phone" class="form-control" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Special Requests:</label>
+                                <textarea name="specialRequests" class="form-control" rows="4" placeholder="Any special requirements..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Driving Options -->
+                        <div class="form-section">
+                            <h3>Driving Options</h3>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="drivingOption" value="WITH_DRIVER" required>
+                                    <span class="radio-text">NEED WITH DRIVER</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="drivingOption" value="SELF_DRIVE" required>
+                                    <span class="radio-text">SELF DRIVE</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Self Drive Requirements -->
+                            <div id="selfDriveReq" class="form-group hidden">
+                                <div class="eligibility-notice">
+                                    <h4>Eligibility for Self Drive:</h4>
+                                    <ol class="eligibility-list">
+                                        <li><strong>Indemnity Form:</strong> This form will be provided by us. You must sign it to accept the terms and conditions for self-driving.</li>
+                                        <li><strong>Driving Licence:</strong> A valid driving licence from the nominated driver is required. The licence must be presented at the time of booking.</li>
+                                        <li><strong>Aadhar Card:</strong> A valid Aadhar card of the nominated driver must be provided as proof of identity.</li>
+                                        <li><strong>Security Deposit:</strong> A security deposit will be required, which will be refunded after the vehicle is returned in the same condition.</li>
+                                        <li><strong>Fuel Costs:</strong> All fuel costs will be paid by the customer.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-section">
+                            <button type="submit" class="btn btn--primary btn--full-width">Submit Booking Request</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Booking Summary Sidebar -->
+                <div class="booking-sidebar">
+                    <div class="summary-card">
+                        <h3>Booking Summary</h3>
+                        <div id="summaryContent">
+                            <p class="empty-state">Fill out the form to see your booking summary</p>
+                        </div>
+                    </div>
+
+                    <!-- Price Estimation (hidden by default) -->
+                    <div id="priceEstimation" class="price-card hidden">
+                        <h3>Live Price Estimation</h3>
+                        <div class="price-breakdown">
+                            <div class="price-item">
+                                <span>Vehicle Cost:</span>
+                                <span id="vehiclePrice">₹0</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Decoration Cost:</span>
+                                <span id="decorationPrice">₹0</span>
+                            </div>
+                            <div class="price-item discount" id="discountRow" style="display: none;">
+                                <span>Srinagar Discount (15%):</span>
+                                <span id="discountAmount">-₹0</span>
+                            </div>
+                            <div class="price-item surcharge" id="surchargeRow" style="display: none;">
+                                <span>Outside Srinagar Surcharge (10%):</span>
+                                <span id="surchargeAmount">+₹0</span>
+                            </div>
+                            <div class="price-total">
+                                <span>Total Amount:</span>
+                                <span id="totalPrice">₹0</span>
+                            </div>
+                        </div>
+                        <button id="whatsappBtn" class="btn btn--primary btn--full-width whatsapp-btn">
+                            📱 Send Booking via WhatsApp
+                        </button>
+                    </div>
+
+                    <!-- Service Note -->
+                    <div class="service-note">
+                        <p><strong>Note:</strong> We serve all of Kashmir. Our standard package covers services between 3 PM and 11 AM within Srinagar; additional hours or travel outside Srinagar may incur nominal charges—please contact us for customized pricing.</p>
+                        <p class="instagram-follow">Follow @valleyweddingcars on Instagram</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
