@@ -1068,6 +1068,45 @@ select.form-control {
   background: rgba(26, 26, 26, 0.95);
 }
 
+.form-control.is-invalid {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 1px rgba(var(--color-error-rgb), 0.45);
+}
+
+.form-group.has-error .form-label {
+  color: var(--color-error);
+}
+
+.radio-group.is-invalid {
+  border: 1px solid rgba(var(--color-error-rgb), 0.65);
+  border-radius: var(--radius-base);
+  padding: var(--space-12);
+  background: rgba(var(--color-error-rgb), 0.08);
+}
+
+.radio-group.is-invalid .radio-label {
+  border-color: rgba(var(--color-error-rgb), 0.65);
+}
+
+.form-error {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-6);
+  display: none;
+}
+
+.form-error.visible {
+  display: block;
+}
+
+.section-label {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 215, 0, 0.7);
+  margin-bottom: var(--space-12);
+}
+
 .form-control::placeholder {
   color: rgba(255, 215, 0, 0.55);
 }

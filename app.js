@@ -75,6 +75,9 @@ let bookingState = {
   drivingOption: ''
 };
 
+const touchedFields = new Set();
+let showAllValidationErrors = false;
+
 // Extract pin codes from location strings
 function extractPinCode(location) {
   const pinCodeRegex = /\b(\d{6})\b/g;
@@ -129,8 +132,12 @@ function attachEventListeners() {
   formElements.forEach(element => {
     element.addEventListener('change', handleFormChange);
     element.addEventListener('input', handleFormInput);
+    element.addEventListener('blur', () => {
+      markFieldTouched(element.name);
+      runCustomValidations();
+    });
   });
-  
+
   form.addEventListener('submit', handleFormSubmit);
   
   // WhatsApp button
@@ -151,12 +158,16 @@ function attachEventListeners() {
 }
 
 function handleFormChange(e) {
+  if (e.target.name) {
+    markFieldTouched(e.target.name);
+  }
   updateBookingState(e);
   updateSummary();
   updatePriceEstimation();
   if (e.target.name === 'vehicle') {
     updateVehiclePreview();
   }
+  runCustomValidations();
 }
 
 function handleFormInput(e) {
@@ -168,6 +179,7 @@ function handleFormInput(e) {
   if (e.target.name === 'vehicle') {
     updateVehiclePreview();
   }
+  runCustomValidations();
 }
 
 function updateBookingState(e) {
@@ -207,7 +219,7 @@ function updateVehiclePreview() {
 function toggleDecorationFields() {
   const wantDecoration = document.querySelector('input[name="wantDecoration"]:checked')?.value;
   bookingState.wantDecoration = wantDecoration || 'No';
-  
+
   if (wantDecoration === 'Yes') {
     decorationTypeGroup.classList.remove('hidden');
     // Auto-select Artificial as default
@@ -225,14 +237,19 @@ function toggleDecorationFields() {
   }
   updateSummary();
   updatePriceEstimation();
+  if (wantDecoration) {
+    markFieldTouched('wantDecoration');
+  }
+  runCustomValidations();
 }
 
 function toggleNamePlateFields() {
   const wantNamePlate = document.querySelector('input[name="wantNamePlate"]:checked')?.value;
   bookingState.wantNamePlate = wantNamePlate || 'No';
-  
+
   if (wantNamePlate === 'Yes') {
     namePlateGroup.classList.remove('hidden');
+    markFieldTouched('namePlateDetails');
   } else {
     namePlateGroup.classList.add('hidden');
     const namePlateInput = document.querySelector('input[name="namePlateDetails"]');
@@ -240,6 +257,10 @@ function toggleNamePlateFields() {
     bookingState.namePlateDetails = '';
   }
   updateSummary();
+  if (wantNamePlate) {
+    markFieldTouched('wantNamePlate');
+  }
+  runCustomValidations();
 }
 
 function toggleSelfDriveRequirements() {
@@ -249,6 +270,10 @@ function toggleSelfDriveRequirements() {
   } else {
     selfDriveReq.classList.add('hidden');
   }
+  if (drivingOption) {
+    markFieldTouched('drivingOption');
+  }
+  runCustomValidations();
 }
 
 function updateSummary() {
@@ -511,12 +536,15 @@ function generateWhatsAppMessage() {
 
 function handleFormSubmit(e) {
   e.preventDefault();
-  
-  if (!form.checkValidity()) {
+
+  showAllValidationErrors = true;
+  const customValid = runCustomValidations();
+
+  if (!customValid || !form.checkValidity()) {
     form.reportValidity();
     return;
   }
-  
+
   // Show success message
   alert('Booking request submitted successfully! You can also use the WhatsApp button to send your booking details directly.');
 }
@@ -541,12 +569,265 @@ document.addEventListener('input', function(e) {
       e.target.setCustomValidity('');
     }
   }
-  
-  if (e.target.name === 'phone') {
-    if (e.target.value && !validatePhone(e.target.value)) {
-      e.target.setCustomValidity('Please enter a 10-digit phone number');
+
+  runCustomValidations();
+});
+
+function runCustomValidations() {
+  if (!form) {
+    return true;
+  }
+
+  let isValid = true;
+
+  const additionalDetailsMessage = 'Please complete all additional details before continuing.';
+  const locationMessage = 'Please enter your location or PIN code.';
+  const phoneRequiredMessage = 'Phone number is required.';
+  const nameRequiredMessage = 'Name is required.';
+  const drivingOptionMessage = 'Please select your driving option.';
+
+  const wantDecorationRadios = Array.from(document.querySelectorAll('input[name="wantDecoration"]'));
+  if (wantDecorationRadios.length) {
+    const isChecked = wantDecorationRadios.some(radio => radio.checked);
+    if (!isChecked) {
+      isValid = false;
+    }
+    updateRadioGroupValidity(
+      wantDecorationRadios,
+      isChecked ? '' : additionalDetailsMessage,
+      shouldShowErrorForField('wantDecoration')
+    );
+  }
+
+  const wantDecorationValue = document.querySelector('input[name="wantDecoration"]:checked')?.value;
+  const decorationTypeGroup = document.getElementById('decorationTypeGroup');
+  const decorationTypeRadios = Array.from(document.querySelectorAll('input[name="decorationType"]'));
+  const shouldValidateDecorationType =
+    decorationTypeGroup && !decorationTypeGroup.classList.contains('hidden') && wantDecorationValue === 'Yes';
+  if (decorationTypeRadios.length) {
+    const decorationChecked = decorationTypeRadios.some(radio => radio.checked);
+    if (shouldValidateDecorationType && !decorationChecked) {
+      isValid = false;
+    }
+    updateRadioGroupValidity(
+      decorationTypeRadios,
+      shouldValidateDecorationType && !decorationChecked ? additionalDetailsMessage : '',
+      shouldValidateDecorationType && (shouldShowErrorForField('decorationType') || showAllValidationErrors)
+    );
+  }
+
+  const wantNamePlateRadios = Array.from(document.querySelectorAll('input[name="wantNamePlate"]'));
+  if (wantNamePlateRadios.length) {
+    const namePlateChecked = wantNamePlateRadios.some(radio => radio.checked);
+    if (!namePlateChecked) {
+      isValid = false;
+    }
+    updateRadioGroupValidity(
+      wantNamePlateRadios,
+      namePlateChecked ? '' : additionalDetailsMessage,
+      shouldShowErrorForField('wantNamePlate')
+    );
+  }
+
+  const namePlateInput = document.querySelector('input[name="namePlateDetails"]');
+  const namePlateGroup = document.getElementById('namePlateGroup');
+  if (namePlateInput && namePlateGroup) {
+    const requiresNamePlate =
+      wantNamePlateRadios.some(radio => radio.checked && radio.value === 'Yes') &&
+      !namePlateGroup.classList.contains('hidden');
+    const namePlateValue = namePlateInput.value.trim();
+    if (requiresNamePlate && !namePlateValue) {
+      isValid = false;
+    }
+    updateFieldValidity(
+      namePlateInput,
+      requiresNamePlate && !namePlateValue ? additionalDetailsMessage : '',
+      {
+        showError: requiresNamePlate && (shouldShowErrorForField('namePlateDetails') || showAllValidationErrors)
+      }
+    );
+  }
+
+  ['startLocation', 'endLocation'].forEach(fieldName => {
+    const input = document.querySelector(`input[name="${fieldName}"]`);
+    if (!input) {
+      return;
+    }
+    const value = input.value.trim();
+    const hasValue = Boolean(value);
+    const hasPin = /\b\d{6}\b/.test(value);
+    if (!hasValue || !hasPin) {
+      isValid = false;
+    }
+    const shouldShow = shouldShowErrorForField(fieldName);
+    const message = !hasValue || !hasPin ? locationMessage : '';
+    updateFieldValidity(input, message, {showError: shouldShow});
+  });
+
+  const fullNameInput = document.querySelector('input[name="fullName"]');
+  if (fullNameInput) {
+    const fullNameValue = fullNameInput.value.trim();
+    if (!fullNameValue) {
+      isValid = false;
+    }
+    updateFieldValidity(fullNameInput, fullNameValue ? '' : nameRequiredMessage, {
+      showError: shouldShowErrorForField('fullName')
+    });
+  }
+
+  const phoneInput = document.querySelector('input[name="phone"]');
+  if (phoneInput) {
+    const phoneValue = phoneInput.value.trim();
+    let message = '';
+    if (!phoneValue) {
+      isValid = false;
+      message = phoneRequiredMessage;
+    } else if (!validatePhone(phoneValue)) {
+      isValid = false;
+      message = 'Please enter a 10-digit phone number';
+    }
+    updateFieldValidity(phoneInput, message, {
+      showError: shouldShowErrorForField('phone')
+    });
+  }
+
+  const drivingRadios = Array.from(document.querySelectorAll('input[name="drivingOption"]'));
+  if (drivingRadios.length) {
+    const drivingSelected = drivingRadios.some(radio => radio.checked);
+    if (!drivingSelected) {
+      isValid = false;
+    }
+    updateRadioGroupValidity(
+      drivingRadios,
+      drivingSelected ? '' : drivingOptionMessage,
+      shouldShowErrorForField('drivingOption')
+    );
+  }
+
+  return isValid;
+}
+
+function updateFieldValidity(input, message, {showError = true} = {}) {
+  if (!input) {
+    return;
+  }
+
+  const container = findValidationContainer(input);
+
+  if (message) {
+    input.setCustomValidity(message);
+    if (showError) {
+      input.classList.add('is-invalid');
+      if (container) {
+        container.classList.add('has-error');
+        const errorEl = ensureErrorElement(container);
+        errorEl.textContent = message;
+        errorEl.classList.add('visible');
+      }
     } else {
-      e.target.setCustomValidity('');
+      input.classList.remove('is-invalid');
+      if (container) {
+        container.classList.remove('has-error');
+        const errorEl = container.querySelector('.form-error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.classList.remove('visible');
+        }
+      }
+    }
+  } else {
+    input.setCustomValidity('');
+    input.classList.remove('is-invalid');
+    if (container) {
+      container.classList.remove('has-error');
+      const errorEl = container.querySelector('.form-error');
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.remove('visible');
+      }
     }
   }
-});
+}
+
+function updateRadioGroupValidity(radios, message, showError = true) {
+  if (!radios.length) {
+    return;
+  }
+
+  const firstRadio = radios[0];
+  const container = findValidationContainer(firstRadio);
+  const radioGroupElement = container?.querySelector('.radio-group') || firstRadio.closest('.radio-group');
+
+  if (message) {
+    firstRadio.setCustomValidity(message);
+    if (showError) {
+      if (radioGroupElement) {
+        radioGroupElement.classList.add('is-invalid');
+      }
+      radios.forEach(radio => radio.classList.add('is-invalid'));
+      if (container) {
+        container.classList.add('has-error');
+        const errorEl = ensureErrorElement(container);
+        errorEl.textContent = message;
+        errorEl.classList.add('visible');
+      }
+    } else {
+      if (radioGroupElement) {
+        radioGroupElement.classList.remove('is-invalid');
+      }
+      radios.forEach(radio => radio.classList.remove('is-invalid'));
+      if (container) {
+        container.classList.remove('has-error');
+        const errorEl = container.querySelector('.form-error');
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.classList.remove('visible');
+        }
+      }
+    }
+  } else {
+    firstRadio.setCustomValidity('');
+    if (radioGroupElement) {
+      radioGroupElement.classList.remove('is-invalid');
+    }
+    radios.forEach(radio => radio.classList.remove('is-invalid'));
+    if (container) {
+      container.classList.remove('has-error');
+      const errorEl = container.querySelector('.form-error');
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.remove('visible');
+      }
+    }
+  }
+}
+
+function findValidationContainer(element) {
+  if (!element) {
+    return null;
+  }
+  return element.closest('[data-validation-group]') || element.closest('.form-group');
+}
+
+function ensureErrorElement(container) {
+  let errorEl = container.querySelector('.form-error');
+  if (!errorEl) {
+    errorEl = document.createElement('div');
+    errorEl.className = 'form-error';
+    errorEl.setAttribute('role', 'alert');
+    errorEl.setAttribute('aria-live', 'polite');
+    container.appendChild(errorEl);
+  }
+  return errorEl;
+}
+
+function markFieldTouched(name) {
+  if (!name) {
+    return;
+  }
+  touchedFields.add(name);
+}
+
+function shouldShowErrorForField(name) {
+  return showAllValidationErrors || touchedFields.has(name);
+}
