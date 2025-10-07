@@ -89,9 +89,9 @@
                         <!-- Additional Details -->
                         <div class="form-section">
                             <h3>Additional Details</h3>
-                            
+
                             <!-- Want Decoration -->
-                            <div class="form-group">
+                            <div class="form-group" data-validation-group="wantDecoration">
                                 <label class="form-label">Want Decoration:</label>
                                 <div class="radio-group inline">
                                     <label class="radio-label">
@@ -106,7 +106,7 @@
                             </div>
 
                             <!-- Decoration Type (hidden by default) -->
-                            <div id="decorationTypeGroup" class="form-group hidden">
+                            <div id="decorationTypeGroup" class="form-group hidden" data-validation-group="decorationType">
                                 <label class="form-label">Decoration Type:</label>
                                 <div class="radio-group inline">
                                     <label class="radio-label">
@@ -121,7 +121,7 @@
                             </div>
 
                             <!-- Want Customized Name Plate -->
-                            <div class="form-group">
+                            <div class="form-group" data-validation-group="wantNamePlate">
                                 <label class="form-label">Want Customized Name Plate:</label>
                                 <div class="radio-group inline">
                                     <label class="radio-label">
@@ -136,7 +136,7 @@
                             </div>
 
                             <!-- Name Plate Details (hidden by default) -->
-                            <div id="namePlateGroup" class="form-group hidden">
+                            <div id="namePlateGroup" class="form-group hidden" data-validation-group="namePlateDetails">
                                 <label class="form-label">Name Plate Details:</label>
                                 <input type="text" name="namePlateDetails" class="form-control" placeholder="Enter name plate text">
                             </div>
@@ -145,11 +145,12 @@
                         <!-- Location Details -->
                         <div class="form-section">
                             <h3>Location Details</h3>
-                            <div class="form-group">
+                            <p class="section-label">Location</p>
+                            <div class="form-group" data-validation-group="startLocation">
                                 <label class="form-label">Event Start Location:</label>
                                 <input type="text" name="startLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" data-validation-group="endLocation">
                                 <label class="form-label">Event End Location:</label>
                                 <input type="text" name="endLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
                             </div>
@@ -187,7 +188,7 @@
                         <!-- Personal Information -->
                         <div class="form-section">
                             <h3>Personal Information</h3>
-                            <div class="form-group">
+                            <div class="form-group" data-validation-group="fullName">
                                 <label class="form-label">Full Name:</label>
                                 <input type="text" name="fullName" class="form-control" required placeholder="Enter your full name">
                             </div>
@@ -195,7 +196,7 @@
                                 <label class="form-label">Email Address:</label>
                                 <input type="email" name="email" class="form-control" required placeholder="Enter your email">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" data-validation-group="phone">
                                 <label class="form-label">Phone Number:</label>
                                 <input type="tel" name="phone" class="form-control" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}">
                             </div>
@@ -208,17 +209,19 @@
                         <!-- Driving Options -->
                         <div class="form-section">
                             <h3>Driving Options</h3>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="drivingOption" value="WITH_DRIVER" required>
-                                    <span class="radio-text">NEED WITH DRIVER</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="drivingOption" value="SELF_DRIVE" required>
-                                    <span class="radio-text">SELF DRIVE</span>
-                                </label>
+                            <div class="form-group" data-validation-group="drivingOption">
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="drivingOption" value="WITH_DRIVER" required>
+                                        <span class="radio-text">NEED WITH DRIVER</span>
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="drivingOption" value="SELF_DRIVE" required>
+                                        <span class="radio-text">SELF DRIVE</span>
+                                    </label>
+                                </div>
                             </div>
-                            
+
                             <!-- Self Drive Requirements -->
                             <div id="selfDriveReq" class="form-group hidden">
                                 <div class="eligibility-notice">
