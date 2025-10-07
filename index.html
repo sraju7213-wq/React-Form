@@ -7,285 +7,304 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="brand-logo">
-                    <img
-                        src="https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@9f43332887c0e0e64f041eb8d5b944707eb8051c/uploads/2025-08-22T08-26-16-447Z-wzwu1bdis.png"
-                        alt="Valley Wedding Cars logo"
-                        class="brand-logo__image"
-                        loading="lazy"
-                        width="512"
-                        height="512"
-                    >
+    <header class="hero">
+        <div class="hero__container">
+            <div class="hero__brand">
+                <img
+                    src="https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@9f43332887c0e0e64f041eb8d5b944707eb8051c/uploads/2025-08-22T08-26-16-447Z-wzwu1bdis.png"
+                    alt="Valley Wedding Cars logo"
+                    class="hero__logo"
+                    loading="lazy"
+                    width="112"
+                    height="112"
+                >
+                <div>
+                    <p class="hero__eyebrow">Luxury Fleet Booking</p>
+                    <h1 class="hero__title">Valley Wedding Cars</h1>
+                    <p class="hero__tagline">Shaadi ka din khaas hota hai... aapki entry bhi waise hi honi chahiye.</p>
+                    <p class="hero__tagline hero__tagline--sub">(Your wedding day is special—your entry should be unforgettable too.)</p>
                 </div>
-                <h1 class="brand-title">Valley Wedding Cars</h1>
-                <h2 class="subtitle">Luxury Fleet Booking</h2>
-                <p class="tagline-urdu">Shaadi ka din khaas hota hai... aapki entry bhi waise hi honi chahiye.</p>
-                <p class="tagline-english">(Your wedding day is special—your entry should be unforgettable too.)</p>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="booking-layout">
-                <!-- Main Form -->
-                <div class="booking-form">
-                    <form id="bookingForm">
-                        <!-- Enquiry Type -->
-                        <div class="form-section">
-                            <h3>Enquiry Type</h3>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="enquiryType" value="Just Checking" required>
-                                    <span class="radio-text">Just Checking</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="enquiryType" value="Know the Price" required>
-                                    <span class="radio-text">Know the Price</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="enquiryType" value="Booking Now" required>
-                                    <span class="radio-text">Booking Now</span>
-                                </label>
-                            </div>
-                        </div>
+    <main class="page">
+        <div class="page__container">
+            <button class="mobile-summary-toggle" id="summaryToggle" type="button" aria-expanded="false" aria-controls="summaryPanel">
+                <span>Booking Summary</span>
+                <span class="mobile-summary-toggle__hint">Tap to view</span>
+            </button>
 
-                        <!-- Service Type -->
-                        <div class="form-section">
-                            <h3>Service Type</h3>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Wedding" required>
-                                    <span class="radio-text">Wedding</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Engagement" required>
-                                    <span class="radio-text">Engagement</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Proposal" required>
-                                    <span class="radio-text">Proposal</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Photoshoot/Video Shoot" required>
-                                    <span class="radio-text">Photoshoot/Video Shoot</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Airport Pickup/Drop" required>
-                                    <span class="radio-text">Airport Pickup/Drop</span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="serviceType" value="Sightseeing/Luxury Tour" required>
-                                    <span class="radio-text">Sightseeing/Luxury Tour</span>
-                                </label>
-                            </div>
+            <div class="page__layout">
+                <section class="form-shell" aria-label="Valley Wedding Cars booking form">
+                    <div class="step-progress" id="stepProgress" role="group" aria-label="Booking steps">
+                        <div class="step-progress__item is-active" data-step="1">
+                            <span class="step-progress__index">1</span>
+                            <span class="step-progress__label">Experience</span>
                         </div>
+                        <div class="step-progress__item" data-step="2">
+                            <span class="step-progress__index">2</span>
+                            <span class="step-progress__label">Journey</span>
+                        </div>
+                        <div class="step-progress__item" data-step="3">
+                            <span class="step-progress__index">3</span>
+                            <span class="step-progress__label">Guest Details</span>
+                        </div>
+                    </div>
 
-                        <!-- Additional Details -->
-                        <div class="form-section">
-                            <h3>Additional Details</h3>
-                            
-                            <!-- Want Decoration -->
-                            <div class="form-group">
-                                <label class="form-label">Want Decoration:</label>
-                                <div class="radio-group inline">
-                                    <label class="radio-label">
-                                        <input type="radio" name="wantDecoration" value="No" required>
-                                        <span class="radio-text">No</span>
+                    <form id="bookingForm" novalidate>
+                        <div class="form-step is-active" data-step="1">
+                            <div class="form-section">
+                                <h2>Enquiry Type</h2>
+                                <div class="radio-grid">
+                                    <label class="segmented-option">
+                                        <input type="radio" name="enquiryType" value="Just Checking" required>
+                                        <span>Just Checking</span>
                                     </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="wantDecoration" value="Yes" required>
-                                        <span class="radio-text">Yes</span>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="enquiryType" value="Know the Price" required>
+                                        <span>Know the Price</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="enquiryType" value="Booking Now" required>
+                                        <span>Booking Now</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <!-- Decoration Type (hidden by default) -->
-                            <div id="decorationTypeGroup" class="form-group hidden">
-                                <label class="form-label">Decoration Type:</label>
-                                <div class="radio-group inline">
-                                    <label class="radio-label">
-                                        <input type="radio" name="decorationType" value="Artificial">
-                                        <span class="radio-text">Artificial</span>
+                            <div class="form-section">
+                                <h2>Service Type</h2>
+                                <div class="radio-grid radio-grid--wrap">
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Wedding" required>
+                                        <span>Wedding</span>
                                     </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="decorationType" value="Fresh">
-                                        <span class="radio-text">Fresh</span>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Engagement" required>
+                                        <span>Engagement</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Proposal" required>
+                                        <span>Proposal</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Photoshoot/Video Shoot" required>
+                                        <span>Photoshoot / Video Shoot</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Airport Pickup/Drop" required>
+                                        <span>Airport Pickup / Drop</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="serviceType" value="Sightseeing/Luxury Tour" required>
+                                        <span>Sightseeing / Luxury Tour</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <!-- Want Customized Name Plate -->
-                            <div class="form-group">
-                                <label class="form-label">Want Customized Name Plate:</label>
-                                <div class="radio-group inline">
-                                    <label class="radio-label">
-                                        <input type="radio" name="wantNamePlate" value="No" required>
-                                        <span class="radio-text">No</span>
-                                    </label>
-                                    <label class="radio-label">
-                                        <input type="radio" name="wantNamePlate" value="Yes" required>
-                                        <span class="radio-text">Yes</span>
-                                    </label>
+                            <div class="form-section">
+                                <h2>Extras</h2>
+                                <div class="form-group">
+                                    <span class="form-label">Want Decoration?</span>
+                                    <div class="radio-grid">
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="wantDecoration" value="No" required checked>
+                                            <span>No</span>
+                                        </label>
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="wantDecoration" value="Yes" required>
+                                            <span>Yes</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="decorationTypeGroup" class="form-group hidden">
+                                    <label class="form-label" for="decorationType">Decoration Type</label>
+                                    <div class="radio-grid">
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="decorationType" value="Artificial">
+                                            <span>Artificial</span>
+                                        </label>
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="decorationType" value="Fresh">
+                                            <span>Fresh</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-label">Want Customized Name Plate?</span>
+                                    <div class="radio-grid">
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="wantNamePlate" value="No" required checked>
+                                            <span>No</span>
+                                        </label>
+                                        <label class="segmented-option segmented-option--inline">
+                                            <input type="radio" name="wantNamePlate" value="Yes" required>
+                                            <span>Yes</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="namePlateGroup" class="form-group hidden">
+                                    <label class="form-label" for="namePlateDetails">Name Plate Details</label>
+                                    <input type="text" id="namePlateDetails" name="namePlateDetails" class="form-control" placeholder="Enter the text for the name plate">
                                 </div>
                             </div>
 
-                            <!-- Name Plate Details (hidden by default) -->
-                            <div id="namePlateGroup" class="form-group hidden">
-                                <label class="form-label">Name Plate Details:</label>
-                                <input type="text" name="namePlateDetails" class="form-control" placeholder="Enter name plate text">
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn--primary next-step" data-next="2">Next: Journey Details</button>
                             </div>
                         </div>
 
-                        <!-- Location Details -->
-                        <div class="form-section">
-                            <h3>Location Details</h3>
-                            <div class="form-group">
-                                <label class="form-label">Event Start Location:</label>
-                                <input type="text" name="startLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Event End Location:</label>
-                                <input type="text" name="endLocation" class="form-control" required placeholder="Fill the full location with the pin code.">
-                            </div>
-                        </div>
-
-                        <!-- Vehicle Selection -->
-                        <div class="form-section">
-                            <h3>Vehicle Selection</h3>
-                            <div class="form-group">
-                                <select id="vehicleSelect" name="vehicle" class="form-control" required>
-                                    <option value="">Choose a vehicle...</option>
-                                </select>
-                            </div>
-                            <div id="vehiclePreview" class="vehicle-preview hidden" aria-live="polite">
-                                <div class="vehicle-preview__image-wrapper">
-                                    <img id="vehicleImage" class="vehicle-preview__image" alt="" loading="lazy" />
+                        <div class="form-step" data-step="2" hidden>
+                            <div class="form-section">
+                                <h2>Locations</h2>
+                                <div class="input-grid">
+                                    <label class="form-group">
+                                        <span class="form-label" for="startLocation">Event Start Location</span>
+                                        <input type="text" id="startLocation" name="startLocation" class="form-control" required placeholder="Include the full address with pin code">
+                                    </label>
+                                    <label class="form-group">
+                                        <span class="form-label" for="endLocation">Event End Location</span>
+                                        <input type="text" id="endLocation" name="endLocation" class="form-control" required placeholder="Include the full address with pin code">
+                                    </label>
                                 </div>
-                                <p id="vehicleImageCaption" class="vehicle-preview__caption"></p>
+                                <p class="input-hint">Services within Srinagar enjoy an instant 15% celebration discount. Outside Srinagar attracts a 10% travel surcharge.</p>
                             </div>
-                        </div>
 
-                        <!-- Date & Time -->
-                        <div class="form-section">
-                            <h3>Date & Time</h3>
-                            <div class="form-group">
-                                <label class="form-label">Event Date:</label>
-                                <input type="date" id="eventDate" name="eventDate" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Event Time:</label>
-                                <input type="time" name="eventTime" class="form-control" required placeholder="When do you want the car at the mentioned location?">
-                            </div>
-                        </div>
-
-                        <!-- Personal Information -->
-                        <div class="form-section">
-                            <h3>Personal Information</h3>
-                            <div class="form-group">
-                                <label class="form-label">Full Name:</label>
-                                <input type="text" name="fullName" class="form-control" required placeholder="Enter your full name">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Email Address:</label>
-                                <input type="email" name="email" class="form-control" required placeholder="Enter your email">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Phone Number:</label>
-                                <input type="tel" name="phone" class="form-control" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Special Requests:</label>
-                                <textarea name="specialRequests" class="form-control" rows="4" placeholder="Any special requirements..."></textarea>
-                            </div>
-                        </div>
-
-                        <!-- Driving Options -->
-                        <div class="form-section">
-                            <h3>Driving Options</h3>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="drivingOption" value="WITH_DRIVER" required>
-                                    <span class="radio-text">NEED WITH DRIVER</span>
+                            <div class="form-section">
+                                <h2>Vehicle Selection</h2>
+                                <label class="form-group">
+                                    <span class="form-label" for="vehicleSelect">Choose Your Vehicle</span>
+                                    <select id="vehicleSelect" name="vehicle" class="form-control" required>
+                                        <option value="">Select a vehicle...</option>
+                                    </select>
                                 </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="drivingOption" value="SELF_DRIVE" required>
-                                    <span class="radio-text">SELF DRIVE</span>
+                                <div id="vehiclePreview" class="vehicle-preview hidden" aria-live="polite">
+                                    <div class="vehicle-preview__image-wrapper">
+                                        <img id="vehicleImage" class="vehicle-preview__image" alt="" loading="lazy" />
+                                    </div>
+                                    <p id="vehicleImageCaption" class="vehicle-preview__caption"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h2>Date &amp; Time</h2>
+                                <div class="input-grid">
+                                    <label class="form-group">
+                                        <span class="form-label" for="eventDate">Event Date</span>
+                                        <input type="date" id="eventDate" name="eventDate" class="form-control" required>
+                                    </label>
+                                    <label class="form-group">
+                                        <span class="form-label" for="eventTime">Event Time</span>
+                                        <input type="time" id="eventTime" name="eventTime" class="form-control" required>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn--ghost prev-step" data-prev="1">Back</button>
+                                <button type="button" class="btn btn--primary next-step" data-next="3">Next: Guest Details</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="3" hidden>
+                            <div class="form-section">
+                                <h2>Guest Details</h2>
+                                <div class="input-grid input-grid--stack">
+                                    <label class="form-group">
+                                        <span class="form-label" for="fullName">Full Name</span>
+                                        <input type="text" id="fullName" name="fullName" class="form-control" required placeholder="Enter your full name">
+                                    </label>
+                                    <label class="form-group">
+                                        <span class="form-label" for="email">Email Address</span>
+                                        <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+                                    </label>
+                                    <label class="form-group">
+                                        <span class="form-label" for="phone">Phone Number</span>
+                                        <input type="tel" id="phone" name="phone" class="form-control" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number">
+                                    </label>
+                                </div>
+                                <label class="form-group">
+                                    <span class="form-label" for="specialRequests">Special Requests</span>
+                                    <textarea id="specialRequests" name="specialRequests" class="form-control" rows="3" placeholder="Any special requirements..."></textarea>
                                 </label>
                             </div>
-                            
-                            <!-- Self Drive Requirements -->
-                            <div id="selfDriveReq" class="form-group hidden">
-                                <div class="eligibility-notice">
-                                    <h4>Eligibility for Self Drive:</h4>
-                                    <ol class="eligibility-list">
-                                        <li><strong>Indemnity Form:</strong> This form will be provided by us. You must sign it to accept the terms and conditions for self-driving.</li>
-                                        <li><strong>Driving Licence:</strong> A valid driving licence from the nominated driver is required. The licence must be presented at the time of booking.</li>
-                                        <li><strong>Aadhar Card:</strong> A valid Aadhar card of the nominated driver must be provided as proof of identity.</li>
-                                        <li><strong>Security Deposit:</strong> A security deposit will be required, which will be refunded after the vehicle is returned in the same condition.</li>
-                                        <li><strong>Fuel Costs:</strong> All fuel costs will be paid by the customer.</li>
+
+                            <div class="form-section">
+                                <h2>Driving Preference</h2>
+                                <div class="radio-grid">
+                                    <label class="segmented-option">
+                                        <input type="radio" name="drivingOption" value="WITH_DRIVER" required>
+                                        <span>Need With Driver</span>
+                                    </label>
+                                    <label class="segmented-option">
+                                        <input type="radio" name="drivingOption" value="SELF_DRIVE" required>
+                                        <span>Self Drive</span>
+                                    </label>
+                                </div>
+                                <div id="selfDriveReq" class="self-drive hidden" aria-live="polite">
+                                    <h3>Eligibility for Self Drive</h3>
+                                    <ol>
+                                        <li><strong>Indemnity Form:</strong> Sign our indemnity agreement at pickup.</li>
+                                        <li><strong>Driving Licence:</strong> Provide a valid licence for the nominated driver.</li>
+                                        <li><strong>Aadhar Card:</strong> Keep a government-issued ID handy for verification.</li>
+                                        <li><strong>Security Deposit:</strong> A refundable deposit is required at the start of service.</li>
+                                        <li><strong>Fuel Costs:</strong> Customers cover their own fuel usage.</li>
                                     </ol>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Submit Button -->
-                        <div class="form-section">
-                            <button type="submit" class="btn btn--primary btn--full-width">Submit Booking Request</button>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn--ghost prev-step" data-prev="2">Back</button>
+                                <button type="submit" class="btn btn--primary btn--full-width">Submit Booking Request</button>
+                            </div>
                         </div>
                     </form>
-                </div>
+                </section>
 
-                <!-- Booking Summary Sidebar -->
-                <div class="booking-sidebar">
+                <aside class="summary-panel" id="summaryPanel">
+                    <button class="summary-panel__close" type="button" id="summaryClose" aria-label="Close summary">×</button>
                     <div class="summary-card">
-                        <h3>Booking Summary</h3>
+                        <h2>Booking Summary</h2>
                         <div id="summaryContent">
-                            <p class="empty-state">Fill out the form to see your booking summary</p>
+                            <p class="empty-state">Fill out the form to see your booking summary.</p>
                         </div>
                     </div>
-
-                    <!-- Price Estimation (hidden by default) -->
                     <div id="priceEstimation" class="price-card hidden">
-                        <h3>Live Price Estimation</h3>
+                        <h2>Live Price Estimation</h2>
                         <div class="price-breakdown">
                             <div class="price-item">
-                                <span>Vehicle Cost:</span>
+                                <span>Vehicle Cost</span>
                                 <span id="vehiclePrice">₹0</span>
                             </div>
                             <div class="price-item">
-                                <span>Decoration Cost:</span>
+                                <span>Decoration Cost</span>
                                 <span id="decorationPrice">₹0</span>
                             </div>
-                            <div class="price-item discount" id="discountRow" style="display: none;">
-                                <span>Srinagar Discount (15%):</span>
+                            <div class="price-item discount" id="discountRow" hidden>
+                                <span>Srinagar Discount (15%)</span>
                                 <span id="discountAmount">-₹0</span>
                             </div>
-                            <div class="price-item surcharge" id="surchargeRow" style="display: none;">
-                                <span>Outside Srinagar Surcharge (10%):</span>
+                            <div class="price-item surcharge" id="surchargeRow" hidden>
+                                <span>Outside Srinagar Surcharge (10%)</span>
                                 <span id="surchargeAmount">+₹0</span>
                             </div>
                             <div class="price-total">
-                                <span>Total Amount:</span>
+                                <span>Total Amount</span>
                                 <span id="totalPrice">₹0</span>
                             </div>
                         </div>
-                        <button id="whatsappBtn" class="btn btn--primary btn--full-width whatsapp-btn">
+                        <button id="whatsappBtn" class="btn btn--primary btn--full-width whatsapp-btn" type="button">
                             📱 Send Booking via WhatsApp
                         </button>
                     </div>
-
-                    <!-- Service Note -->
                     <div class="service-note">
-                        <p><strong>Note:</strong> We serve all of Kashmir. Our standard package covers services between 3 PM and 11 AM within Srinagar; additional hours or travel outside Srinagar may incur nominal charges—please contact us for customized pricing.</p>
-                        <p class="instagram-follow">Follow @valleyweddingcars on Instagram</p>
+                        <p><strong>Service Area:</strong> We cover all of Kashmir. Standard packages include service between 3 PM and 11 AM within Srinagar. Extra hours or travel outside Srinagar may involve additional charges—contact us for a tailored quote.</p>
+                        <p class="instagram-follow">Follow <a href="https://www.instagram.com/valleyweddingcars" target="_blank" rel="noopener noreferrer">@valleyweddingcars</a> on Instagram.</p>
                     </div>
-                </div>
+                </aside>
             </div>
         </div>
     </main>
