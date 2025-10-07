@@ -1,15 +1,51 @@
 // Application data
 const appData = {
   vehicles: [
-    {label: "AUDI A6", price: 16000},
-    {label: "BMW 330 D Convertible", price: 26000},
-    {label: "BMW 5 Series F10 (Old Shape)", price: 16000},
-    {label: "BMW 520D", price: 16000},
-    {label: "BMW 5 SERIES G30 (New Shape)", price: 24000},
-    {label: "Mercedes G-Wagon", price: 132000},
-    {label: "MERCEDES Maybach", price: 85000},
-    {label: "MERCEDES S-CLASS S350", price: 18000},
-    {label: "Range Rover Sport", price: 85000}
+    {
+      label: "AUDI A6",
+      price: 16000,
+      image: "https://i.postimg.cc/zfxy8jD7/AUDI-A6.jpg"
+    },
+    {
+      label: "BMW 330 D Convertible",
+      price: 26000,
+      image: "https://i.postimg.cc/L4nyP974/BMW-330-D-Convertible.jpg"
+    },
+    {
+      label: "BMW 5 Series F10 (Old Shape)",
+      price: 16000,
+      image: "https://i.postimg.cc/zvgvwYC2/BMW-5-Series-F10-OLD-SHAPE.jpg"
+    },
+    {
+      label: "BMW 520D",
+      price: 16000,
+      image: "https://i.postimg.cc/26dwqh2j/BMW-520D.jpg"
+    },
+    {
+      label: "BMW 5 SERIES G30 (New Shape)",
+      price: 24000,
+      image: "https://i.postimg.cc/Hj1xBv3Y/BMW-5-SERIES-G30-New-shape.jpg"
+    },
+    {
+      label: "Mercedes G-Wagon",
+      price: 132000,
+      image: "https://i.postimg.cc/J7vp5wVN/Mercedes-G-wagon.jpg"
+    },
+    {
+      label: "MERCEDES Maybach",
+      price: 85000,
+      image: "https://i.postimg.cc/MKBdssqh/MERCEDES-Maybach.jpg"
+    },
+    {
+      label: "MERCEDES S-CLASS S350",
+      price: 18000,
+      image: "https://i.postimg.cc/cLNTPQJ6/MERCEDES-S-CLASS-S350.jpg"
+    },
+    {
+      label: "Range Rover Sport",
+      price: 85000,
+      image: "https://i.postimg.cc/rwCgTKdj/Range-Rover-Sport.jpg"
+    }
   ],
   decorations: [
     {label: "No", price: 0},
@@ -56,6 +92,9 @@ const priceEstimation = document.getElementById('priceEstimation');
 const summaryContent = document.getElementById('summaryContent');
 const whatsappBtn = document.getElementById('whatsappBtn');
 const eventDateInput = document.getElementById('eventDate');
+const vehiclePreview = document.getElementById('vehiclePreview');
+const vehicleImage = document.getElementById('vehicleImage');
+const vehicleImageCaption = document.getElementById('vehicleImageCaption');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -67,6 +106,7 @@ function initializeApp() {
   setMinDate();
   attachEventListeners();
   updateSummary(); // Initial update
+  updateVehiclePreview();
 }
 
 function populateVehicleOptions() {
@@ -114,6 +154,9 @@ function handleFormChange(e) {
   updateBookingState(e);
   updateSummary();
   updatePriceEstimation();
+  if (e.target.name === 'vehicle') {
+    updateVehiclePreview();
+  }
 }
 
 function handleFormInput(e) {
@@ -121,6 +164,9 @@ function handleFormInput(e) {
   updateSummary();
   if (['startLocation', 'endLocation'].includes(e.target.name)) {
     updatePriceEstimation();
+  }
+  if (e.target.name === 'vehicle') {
+    updateVehiclePreview();
   }
 }
 
@@ -137,6 +183,24 @@ function updateBookingState(e) {
     }
   } else {
     bookingState[name] = value;
+  }
+}
+
+function updateVehiclePreview() {
+  if (!vehiclePreview || !vehicleImage || !vehicleImageCaption) {
+    return;
+  }
+
+  if (bookingState.vehicle && bookingState.vehicle.image) {
+    vehiclePreview.classList.remove('hidden');
+    vehicleImage.src = bookingState.vehicle.image;
+    vehicleImage.alt = `${bookingState.vehicle.label} - Valley Wedding Cars`;
+    vehicleImageCaption.textContent = bookingState.vehicle.label;
+  } else {
+    vehiclePreview.classList.add('hidden');
+    vehicleImage.src = '';
+    vehicleImage.alt = '';
+    vehicleImageCaption.textContent = '';
   }
 }
 
