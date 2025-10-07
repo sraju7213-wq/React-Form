@@ -817,6 +817,33 @@ select.form-control {
   pointer-events: none;
 }
 
+.brand-logo {
+  --brand-logo-size: clamp(88px, 22vw, 140px);
+  width: var(--brand-logo-size);
+  height: var(--brand-logo-size);
+  margin: 0 auto var(--space-16);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.55),
+    0 0 25px rgba(255, 215, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-logo__image {
+  position: relative;
+  z-index: 1;
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.25));
+}
+
 .header-content {
   position: relative;
   z-index: 1;
