@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Primitive Color Tokens */
   --color-white: rgba(255, 255, 255, 1);
@@ -1455,4 +1459,41 @@ select.form-control {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gold-deep);
+}
+
+/* Admin + Shared Enhancements */
+.summary-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  font-size: 0.95rem;
+}
+
+.summary-list dt {
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.75);
+}
+
+.summary-list dd {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.9);
+}
+
+.price-adjustments {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.price-adjustments__empty {
+  font-size: 0.85rem;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.price-item.discount span:last-child {
+  color: #16a34a;
+}
+
+.price-item.surcharge span:last-child {
+  color: #f97316;
 }

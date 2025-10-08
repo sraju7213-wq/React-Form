@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valley Wedding Cars - Luxury Fleet Booking</title>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <!-- Header Section -->
@@ -258,21 +258,18 @@
                         <h3>Live Price Estimation</h3>
                         <div class="price-breakdown">
                             <div class="price-item">
-                                <span>Vehicle Cost:</span>
+                                <span>Vehicle Base:</span>
                                 <span id="vehiclePrice">₹0</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Distance Component:</span>
+                                <span id="distancePrice">₹0</span>
                             </div>
                             <div class="price-item">
                                 <span>Decoration Cost:</span>
                                 <span id="decorationPrice">₹0</span>
                             </div>
-                            <div class="price-item discount" id="discountRow" style="display: none;">
-                                <span>Srinagar Discount (15%):</span>
-                                <span id="discountAmount">-₹0</span>
-                            </div>
-                            <div class="price-item surcharge" id="surchargeRow" style="display: none;">
-                                <span>Outside Srinagar Surcharge (10%):</span>
-                                <span id="surchargeAmount">+₹0</span>
-                            </div>
+                            <div id="adjustmentsList" class="price-adjustments"></div>
                             <div class="price-total">
                                 <span>Total Amount:</span>
                                 <span id="totalPrice">₹0</span>
@@ -293,6 +290,6 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
