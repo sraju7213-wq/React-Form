@@ -1,5 +1,6 @@
 import './style.css';
 import type { Car, PriceEstimate } from '../shared/types';
+import { formatCurrency } from '../shared/price';
 
 type DecorationType = 'Artificial' | 'Fresh' | '';
 
@@ -129,9 +130,6 @@ const setMinDate = () => {
   const today = new Date().toISOString().split('T')[0];
   eventDateInput.min = today;
 };
-
-const formatCurrency = (amount: number): string =>
-  `₹${Math.round(amount).toLocaleString('en-IN')}`;
 
 const populateVehicleOptions = () => {
   if (!vehicleSelect) {

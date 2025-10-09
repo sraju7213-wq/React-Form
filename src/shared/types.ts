@@ -1,4 +1,6 @@
 export type CarCategory = 'sedan' | 'suv' | 'luxury' | 'vintage' | 'other';
+export type PriceScope = 'srinagar' | 'outside_srinagar' | 'weekend' | 'custom';
+export type RuleType = 'discount' | 'surcharge' | 'multiplier';
 
 export type Car = {
   id: string;
@@ -11,8 +13,8 @@ export type Car = {
   created_at?: string;
 };
 
-export type PriceRuleType = 'discount' | 'surcharge' | 'multiplier';
-export type PriceRuleScope = 'srinagar' | 'outside_srinagar' | 'weekend' | 'custom';
+export type PriceRuleType = RuleType;
+export type PriceRuleScope = PriceScope;
 
 export type PriceRule = {
   id: string;
@@ -28,7 +30,7 @@ export type PriceEstimateInput = {
   carId: string;
   kms?: number;
   dateISO?: string;
-  scope: Extract<PriceRuleScope, 'srinagar' | 'outside_srinagar'>;
+  scope: Extract<PriceScope, 'srinagar' | 'outside_srinagar'>;
 };
 
 export type PriceAdjustment = {
