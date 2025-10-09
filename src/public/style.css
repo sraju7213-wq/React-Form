@@ -1248,6 +1248,10 @@ select.form-control {
   color: rgba(255, 215, 0, 0.85);
 }
 
+.price-item.muted {
+  color: rgba(255, 215, 0, 0.55);
+}
+
 .price-item.discount {
   color: #4ade80;
 }
@@ -1267,6 +1271,13 @@ select.form-control {
   border-top: 2px solid rgba(255, 215, 0, 0.35);
   margin-top: var(--space-12);
   text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+}
+
+.price-adjustments {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-12);
 }
 
 /* Eligibility Notice - Updated for exact requirements */
